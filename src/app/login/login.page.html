@@ -1,0 +1,30 @@
+<section >
+  <ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <section class="page">
+    <ion-content [fullscreen]="true" class="loginform">
+      <div class="container">
+        <ion-list>
+          <ion-item class="inpput">
+            <ion-input  labelPlacement="stacked" label="Email" placeholder="email@domain.com">
+              <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input  type="password" labelPlacement="stacked" label="Password" placeholder="Enter your password">
+              <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+              <ion-button fill="clear" slot="end" aria-label="Show/hide">
+                <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+              </ion-button>
+            </ion-input>
+          </ion-item>
+          <ion-button expand="block" type="submit" class="login-button">Login</ion-button>
+        </ion-list>
+      </div>
+    </ion-content>
+  </section>
+</section>
+

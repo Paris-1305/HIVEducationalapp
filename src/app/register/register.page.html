@@ -1,0 +1,74 @@
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Registration</ion-title>
+    </ion-toolbar>
+  </ion-header>  
+  <ion-content class="con">
+    <form >
+      <ion-list>
+        <!-- Name -->
+        <ion-item>
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input type="text" [(ngModel)]="formData.name" name="name" required></ion-input>
+        </ion-item>
+  
+        <!-- Gender -->
+        <ion-item>
+          <ion-label>Gender</ion-label>
+          <ion-select [(ngModel)]="formData.gender" name="gender" required>
+            <ion-select-option value="male">Male</ion-select-option>
+            <ion-select-option value="female">Female</ion-select-option>
+            <ion-select-option value="other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <!-- Age -->
+        <ion-item>
+          <ion-label position="floating">Age</ion-label>
+          <ion-input type="number" [(ngModel)]="formData.age" name="age" required></ion-input>
+        </ion-item>
+  
+        <!-- Education Level -->
+        <ion-item>
+          <ion-label>Level of Education</ion-label>
+          <ion-select [(ngModel)]="formData.education" name="education" required>
+            <ion-select-option value="highschool">High School</ion-select-option>
+            <ion-select-option value="bachelor">Bachelor's Degree</ion-select-option>
+            <ion-select-option value="master">Master's Degree</ion-select-option>
+            <ion-select-option value="doctorate">Doctorate</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <!-- Marital Status -->
+        <ion-item>
+          <ion-label>Marital Status</ion-label>
+          <ion-select [(ngModel)]="formData.maritalStatus" name="maritalStatus" required>
+            <ion-select-option value="single">Single</ion-select-option>
+            <ion-select-option value="married">Married</ion-select-option>
+            <ion-select-option value="divorced">Divorced</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <!-- Location -->
+        <ion-item>
+          <ion-label position="floating">Location</ion-label>
+          <ion-input type="text" [(ngModel)]="formData.location" name="location" required></ion-input>
+        </ion-item>
+  
+        <!-- HIV Health Status -->
+        <ion-item>
+          <ion-label>HIV Health Status</ion-label>
+          <ion-select [(ngModel)]="formData.hivStatus" name="hivStatus" required>
+            <ion-select-option value="positive">Positive</ion-select-option>
+            <ion-select-option value="negative">Negative</ion-select-option>
+            <ion-select-option value="unknown">Unknown</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+  
+      <ion-button expand="full" type="submit" (click)="submitForm()">Submit</ion-button>
+    </form>
+  </ion-content>
+
+

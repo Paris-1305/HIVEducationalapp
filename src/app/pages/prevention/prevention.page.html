@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recommended Pages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let page of recommendations">
+    <h2>{{ page.title }}</h2>
+    <p>Similarity: {{ page.similarity | number:'1.2-2' }}</p>
+  </div>
+</ion-content>
+

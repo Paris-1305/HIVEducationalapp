@@ -1,0 +1,30 @@
+/* login.page.scss */
+.loginform {
+   /* --ion-background-color: #E1EAF9;*/ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-bottom: 50%;
+  }
+  .input{
+  margin: auto;
+  }
+  .container {
+    background: #ffffff; 
+    padding: 70px;      
+    border-radius: 10px;
+  
+   /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    max-width: 650px; 
+    height: 63%;
+    width: 90%; 
+    margin: auto;
+  }
+  .login-button {
+    margin-top: 20px;    /* Add spacing above the login button */
+  }
+  .page{
+    margin-top: 50px;
+  }
+  
