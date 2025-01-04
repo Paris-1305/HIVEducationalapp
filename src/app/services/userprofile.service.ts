@@ -19,29 +19,18 @@ export class UserProfileService {
   }
 
   // Dynamically update the profile vector based on user interaction
-  updateUserProfileVector(userId: string, interactionType: string): Observable<UserProfile | undefined> {
-    const userProfile = this.userProfiles.find(profile => profile.userId === userId);
-
-    if (userProfile) {
-      // Update logic based on interaction type
-      switch (interactionType) {
-        case 'pageTime':
-          // Example: Update the vector based on time spent on a page
-          userProfile.profileVector[0] += 0.1; // Increase interest in prevention-related topics
-          break;
-        case 'pageClick':
-          // Example: Increase interest in treatment-related topics
-          userProfile.profileVector[1] += 0.2;
-          break;
-        // Add more cases for other types of interactions as necessary
-        default:
-          break;
-      }
-
-      return of(userProfile); // Return updated profile
+  updateUserProfileVector(userProfile: any, page: any, interactionType: string, data: any): any {
+    if (!userProfile.profileVector) {
+      userProfile.profileVector = [0, 0, 0, 0, 0]; // Default vector if not defined
     }
-    return of(undefined); // If the user profile is not found
+  
+    for (let i = 0; i < userProfile.profileVector.length; i++) {
+      userProfile.profileVector[i] += page.contentVector[i] * 0.1; // Weighted update
+    }
+  
+    return userProfile;
   }
+  
 
   // Save the user profile with updated vector
   saveUserProfile(userProfile: UserProfile): Observable<UserProfile> {
@@ -56,3 +45,4 @@ export class UserProfileService {
     return of(userProfile); // Return the saved profile
   }
 }
+

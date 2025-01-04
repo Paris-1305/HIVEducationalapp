@@ -10,14 +10,19 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   templateUrl: './prevention.page.html',
   styleUrls: ['./prevention.page.scss'],
   standalone: true,
+ imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+})
 
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+
+@Component({
+  selector: 'app-prevention',
+  templateUrl: './prevention.page.html',
+  styleUrls: ['./prevention.page.scss'],
 })
 export class PreventionPage implements OnInit {
-
-  userProfile: any;
-  page: any; // Page object containing contentVector
-  timeSpent: number = 0; // Time spent on the page (in seconds)
+  userProfile: any = null; // User profile object
+  pageContent: any = null; // Current page content
+  interactionData: { timeSpent: number; clicks: number } = { timeSpent: 0, clicks: 0 };
 
   constructor(
     private contentService: ContentService,
@@ -25,27 +30,69 @@ export class PreventionPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userProfile = this.userProfileService.getUserProfile("0"); // Get user profile
-    this.page = this.contentService.getPageById('prevention'); // Get page details for prevention
+    this.initializePage();
   }
 
-  onTimeSpent(seconds: number) {
-    this.timeSpent = seconds;
-    this.updateContentVector('timeSpent');
-    this.updateUserProfileVector();
+  initializePage() {
+    // Fetch user profile and page content dynamically
+    this.userProfileService.getUserProfile('user_id_placeholder').subscribe({
+      next: (profile) => {
+        this.userProfile = profile;
+        this.fetchPageContent();
+      },
+      error: (err) => console.error('Error fetching user profile:', err),
+    });
   }
 
-  onPageClick() {
-    this.updateContentVector('click');
-    this.updateUserProfileVector();
+  fetchPageContent() {
+    this.contentService.getPageById('prevention').subscribe({
+      next: (page) => {
+        this.pageContent = page;
+      },
+      error: (err) => console.error('Error fetching page content:', err),
+    });
   }
 
-  updateContentVector(interactionType: string) {
-    this.page = this.contentService.updateContentVector(this.page, interactionType);
+  // Track user interactions
+  trackTimeSpent(seconds: number) {
+    this.interactionData.timeSpent += seconds;
+    this.updateContentVector('timeSpent', seconds);
+    this.updateUserProfileVector('timeSpent', seconds);
   }
 
-  updateUserProfileVector() {
-    this.userProfile = this.userProfileService.updateUserProfileVector(this.userProfile, this.page);
-    this.userProfileService.saveUserProfile(this.userProfile); // Send updated profile to backend
+  trackClick() {
+    this.interactionData.clicks++;
+    this.updateContentVector('click', 1); // Example: 1 click
+    this.updateUserProfileVector('click', 1);
   }
+
+  updateContentVector(interactionType: string, data: any) {
+    if (this.pageContent) {
+      this.contentService.updatePageVector(this.pageContent.id, interactionType, data).subscribe({
+        next: (updatedPage) => {
+          this.pageContent = updatedPage;
+          console.log('Content vector updated successfully:', updatedPage);
+        },
+        error: (err) => console.error('Error updating content vector:', err),
+      });
+    }
+  }
+
+  // Optional: Update user profile vector if necessary
+  updateUserProfileVector(interactionType: string, data: any) {
+    if (this.userProfile && this.pageContent) {
+      this.userProfile = this.userProfileService.updateUserProfileVector(
+        this.userProfile,
+        this.pageContent,
+        interactionType,
+        data
+      );
+  
+      this.userProfileService.saveUserProfile(this.userProfile).subscribe({
+        next: () => console.log('User profile updated successfully'),
+        error: (err) => console.error('Error updating user profile:', err),
+      });
+    }
+  }
+  
 }

@@ -4,7 +4,7 @@ import { IonApp, IonRouterOutlet, IonMenu, IonContent,IonMenuButton,IonSearchbar
  } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-rot',
   templateUrl: 'app.component.html',
   imports: [IonApp, IonRouterOutlet, IonMenu,IonButtons,IonMenuButton,IonList,IonToolbar,
     IonHeader,IonTitle,IonItem, IonContent,IonSearchbar],

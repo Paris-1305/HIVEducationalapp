@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Treatment for HIV/AIDS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="treatmentPage">
+    <h1>{{ treatmentPage.title }}</h1>
+    <p>{{ treatmentPage.description }}</p>
+
+    <ion-list>
+      <ion-item *ngFor="let section of treatmentPage.sections">
+        <h2>{{ section.title }}</h2>
+        <p>{{ section.content }}</p>
+      </ion-item>
+    </ion-list>
+
+    <h3>Resources</h3>
+    <ul>
+      <li *ngFor="let link of treatmentPage.resources">
+        <a href="{{ link.url }}" (click)="handleLinkClick(link.id)">{{ link.title }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!treatmentPage">
+    <p>Loading treatment content...</p>
+  </div>
+</ion-content>

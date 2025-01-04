@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>HIV Basics</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="pageContent">
+    <h2>{{ pageContent.title }}</h2>
+    <p>{{ pageContent.description }}</p>
+
+    <!-- Track user interaction -->
+    <ion-button (click)="onPageClick()">Click for More Info</ion-button>
+    
+    <p>Time spent: {{ timeSpent }} seconds</p>
+  </div>
+</ion-content>

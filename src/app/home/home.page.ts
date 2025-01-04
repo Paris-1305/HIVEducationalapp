@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonSearchbar,
-  IonContent, IonButton, IonMenuButton } from '@ionic/angular/standalone';
+IonContent, IonButton, IonMenuButton } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { WebIntent } from '@ionic-native/web-intent/ngx'; 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonButton, IonSearchbar,IonTitle, IonContent],
+  imports: [IonHeader, IonToolbar, IonButton, IonSearchbar,IonTitle, IonContent,IonicModule],
 })
 export class HomePage {
   constructor(private webIntent: WebIntent) {}
